@@ -119,6 +119,7 @@
         signin: 'login',
         signup: 'signup',
         reset: 'changePassword',
+        validateUser: 'validateUser',
         library: function() {
           return config.auth0js;
         },
@@ -292,11 +293,14 @@
           if (config.sso) {
             config.auth0js.getSSOData(authUtils.applied(function(err, ssoData) {
               if (ssoData.sso) {
-                auth.signin({
+                var loginOptions = {
                   popup: false,
                   callbackOnLocationHash: true,
                   connection: ssoData.lastUsedConnection.name
-                }, null, null, 'Auth0');
+                };
+                callHandler('ssoLogin', { loginOptions: loginOptions });
+
+                auth.signin(loginOptions, null, null, 'Auth0');
               }
             }));
           }
@@ -358,7 +362,7 @@
       auth.init = angular.bind(config, config.init);
 
       auth.getToken = function(options) {
-        options = options || { scope: 'openid' };
+        options = options || { scope: 'openid', scope: 'audible:content_read' };
 
         if (!options.id_token && !options.refresh_token) {
           options.id_token = auth.idToken;
@@ -457,6 +461,16 @@
         var resetCall = authUtils.callbackify(getInnerLibraryMethod('reset'), successCallback, errorCallback, auth0lib);
 
         resetCall(options);
+      };
+
+      auth.validateUser = function(options, successCallback, errorCallback) {
+          options = options || {};
+
+          options = getInnerLibraryConfigField('parseOptions')(options);
+          var auth0lib = config.auth0lib;
+          var validateUserCall = authUtils.callbackify(getInnerLibraryMethod('validateUser'), successCallback, errorCallback, auth0lib);
+
+          validateUserCall(options);
       };
 
       auth.signout = function() {

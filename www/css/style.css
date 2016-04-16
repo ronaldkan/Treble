@@ -1,1 +1,25 @@
 /* Empty. Add your own CSS if you like */
+.theVid{
+	-webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: 100%;
+}
+
+.button-circle {
+  width: 60px !important;
+  height: 60px !important;
+  border-radius: 50% !important;
+  border-color: #FFFFFF;
+  border-width: 4px;
+}
+
+.sizing {
+	background-color: #FD913E;
+}
+
+video {
+    min-width: 100%;
+    min-height: 100%;
+    top: 50%;
+    transform: translate(-50%, -50%); 
+}

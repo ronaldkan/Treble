@@ -6,13 +6,17 @@ angular.module('starter.controllers', [])
       // This asks for the refresh token
       // So that the user never has to log in again
       authParams: {
-        scope: 'openid offline_access'
+        scope: 'openid audible:content_read offline_access'
       }
-    }, function(profile, idToken, accessToken, state, refreshToken) {
+    }, function(data, profile, idToken, accessToken, state, refreshToken) {
+      store.set('accessToken', data.identities[0].access_token)
       store.set('profile', profile);
       store.set('token', idToken);
       store.set('refreshToken', refreshToken);
       $state.go('tab.dash');
+      console.log(data.identities[0].access_token);
+      console.log(idToken);
+      console.log(data);
     }, function(error) {
       console.log("There was an error logging in", error);
     });
@@ -27,16 +31,27 @@ angular.module('starter.controllers', [])
   
 })
 
-.controller('DashCtrl', function($scope, $http) {
+.controller('DashCtrl', function($scope, $http, store, auth) {
   $scope.callApi = function() {
     // Just call the API as you'd do using $http
+    alert(store.get('accessToken'));
     $http({
-      url: 'http://auth0-nodejsapi-sample.herokuapp.com/secured/ping',
-      method: 'GET'
-    }).then(function() {
-      alert("We got the secured data successfully");
-    }, function() {
-      alert("Please download the API seed so that you can call it.");
+      method: 'POST',
+      url: 'https://api.audible.com/1.0/content/B00UX8ODPM/licenserequest',
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': 'bearer' + store.get('accessToken'),
+        'Client-ID': 'amzn1.application-oa2-client.8ce1be50cc2940bb820ab96ccb74811b',
+        'Content-Type': 'application/json'
+      },
+      data: { 
+        "Consumption_type":"Streaming",
+        "Drm_type":"Hls"
+      }
+    }).success(function(data) {
+        alert(data);
+    },function() {
+      alert("FAILED");
     });
   };
 

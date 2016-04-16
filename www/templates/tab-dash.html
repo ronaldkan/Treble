@@ -1,7 +1,28 @@
 <ion-view>
-  <ion-content class="padding">
-    <button class="button button-positive button-block" ng-click="callApi()">
-    Call API
-    </button>
-  </ion-content>
+  <ion-content>
+  <video autoplay="autoplay" class="theVid">
+  	<source src="img/Dog.mp4" type="video/mp4"/>
+  </video>
+</ion-content>
+<div class="row">
+<div class="padding-right padding-bottom padding-top" style="padding-top:30px; padding-left:15px">
+    <button class="button button-circle icon ion-speakerphone sizing light" ng-click="callApi()"></button>
+</div>
+</div>
+<div class="row">
+<div class="padding-bottom padding-right" style="padding-left:15px;">
+    <button class="button button-circle icon ion-ios-book sizing light"></button>
+</div>
+</div>
+<div class="row">
+<div class="padding-bottom padding-right" style="padding-left:15px;">
+    <button class="button button-circle icon ion-camera sizing light"></button>
+</div>
+</div>
+<div class="row">
+<div class="padding-bottom padding-right" style="padding-left:15px;">
+    <button class="button button-circle icon ion-log-out sizing light" ng-click="logout()"></button>
+</div>
+</div>
+
 </ion-view>
