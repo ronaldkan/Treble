@@ -1,17 +1,17 @@
 <ion-view>
   <ion-content>
-  <video autoplay="autoplay" class="theVid">
+  <video id="theVid" autoplay="autoplay" class="theVid">
   	<source src="img/Dog.mp4" type="video/mp4"/>
   </video>
 </ion-content>
 <div class="row">
 <div class="padding-right padding-bottom padding-top" style="padding-top:30px; padding-left:15px">
-    <button class="button button-circle icon ion-speakerphone sizing light" ng-click="callApi()"></button>
+    <button class="button button-circle icon ion-ios-book sizing light" ng-click="listenStory()"></button>
 </div>
 </div>
 <div class="row">
 <div class="padding-bottom padding-right" style="padding-left:15px;">
-    <button class="button button-circle icon ion-ios-book sizing light"></button>
+    <button class="button button-circle icon ion-speakerphone sizing light" ng-click="listenCommand()"></button>
 </div>
 </div>
 <div class="row">
@@ -21,8 +21,13 @@
 </div>
 <div class="row">
 <div class="padding-bottom padding-right" style="padding-left:15px;">
-    <button class="button button-circle icon ion-log-out sizing light" ng-click="logout()"></button>
+    <button class="button button-circle icon ion-log-out sizing light" ng-click="restart()"></button>
 </div>
 </div>
-
+<audio hidden controls id="myAud">
+  <source src="img/dog_voice.mp3" type="audio/mpeg">
+</audio>
+<audio hidden controls id="myStory">
+  <source src="img/story.mp3" type="audio/mpeg">
+</audio>
 </ion-view>

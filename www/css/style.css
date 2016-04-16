@@ -16,10 +16,3 @@
 .sizing {
 	background-color: #FD913E;
 }
-
-video {
-    min-width: 100%;
-    min-height: 100%;
-    top: 50%;
-    transform: translate(-50%, -50%); 
-}

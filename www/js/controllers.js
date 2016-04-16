@@ -54,6 +54,20 @@ angular.module('starter.controllers', [])
       alert("FAILED");
     });
   };
+  $scope.listenCommand = function(){
+    var vid = document.getElementById("myAud"); 
+    vid.play();
+  };
+  $scope.restart = function(){
+    var vid = document.getElementById("theVid");
+    vid.currentTime = 0;
+    vid.load();
+    vid.play();
+  };
+  $scope.listenStory = function(){
+    var vid = document.getElementById("myStory");
+    vid.play();
+  };
 
 })
 
