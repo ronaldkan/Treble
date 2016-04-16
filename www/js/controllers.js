@@ -60,9 +60,15 @@ angular.module('starter.controllers', [])
   };
   $scope.restart = function(){
     var vid = document.getElementById("theVid");
+    var aud = document.getElementById("myAud");
+    var story = document.getElementById("myStory");
     vid.currentTime = 0;
     vid.load();
     vid.play();
+    aud.currentTime = 0;
+    aud.pause();
+    story.currentTime = 0;
+    story.pause();
   };
   $scope.listenStory = function(){
     var vid = document.getElementById("myStory");
